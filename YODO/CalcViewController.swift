@@ -31,7 +31,14 @@ class CalcViewController: UIViewController {
     var buttonPlusMinus = UIButton()
     var buttonPercent = UIButton()
     var buttonDot = UIButton()
-    var arrayOfButton: [UIButton] = []
+    var arrayOfNumbersButton: [UIButton] = []
+    var arrayForStringResult: [String] = []
+    var arrayForIntResult: [Int] = []
+    var firstNumber: Double = 0
+    var secondNumber: Double = 0
+    var operationSign: String = ""
+    var result: Double = 0
+    
     
     
     override func viewDidLoad() {
@@ -60,7 +67,6 @@ class CalcViewController: UIViewController {
         resultLabel.font = .systemFont(ofSize: 45)
         
         addButtonOnView()
-        addTagForNumbers()
         addTargets()
         
     }
@@ -104,6 +110,7 @@ class CalcViewController: UIViewController {
         addButtonZero()
         buttonDot = buttonOnCalc(UIbutton: buttonDot, title: ".", constTop: buttonThree.bottomAnchor, constLeft: buttonZero.rightAnchor)
         buttonEqual = buttonOnCalc(UIbutton: buttonEqual, title: "=", constTop: buttonPlus.bottomAnchor, constLeft: buttonDot.rightAnchor)
+        arrayOfNumbersButton = [buttonOne, buttonTwo, buttonThree, buttonFour, buttonFive, buttonSix, buttonSeven, buttonEight, buttonNine, buttonZero]
         
     }
     
@@ -141,83 +148,214 @@ class CalcViewController: UIViewController {
         buttonZero.layer.borderWidth = 3
     }
     
-    //MARK: - Tag for Numbers
-    func addTagForNumbers() {
-        buttonOne.tag = 1
-        buttonTwo.tag = 2
-        buttonThree.tag = 3
-        buttonFour.tag = 4
-        buttonFive.tag = 5
-        buttonSix.tag = 6
-        buttonSeven.tag = 7
-        buttonEight.tag = 8
-        buttonNine.tag = 9
-        buttonZero.tag = 0
-    }
-    
     //MARK: - add Targets
     func addTargets() {
         buttonOne.addTarget(self, action: #selector(pressNumberOneButton), for: .touchUpInside)
         buttonTwo.addTarget(self, action: #selector(pressNumberTwoButton), for: .touchUpInside)
         buttonThree.addTarget(self, action: #selector(pressNumberThreeButton), for: .touchUpInside)
-//        buttonFour.addTarget(self, action: #selector(pressNumberFourButton), for: .touchUpInside)
-//        buttonFive.addTarget(self, action: #selector(pressNumberFiveButton), for: .touchUpInside)
-//        buttonSix.addTarget(self, action: #selector(pressNumberSixButton), for: .touchUpInside)
-//        buttonSeven.addTarget(self, action: #selector(pressNumberSevenButton), for: .touchUpInside)
-//        buttonEight.addTarget(self, action: #selector(pressNumberEightButton), for: .touchUpInside)
-//        buttonNine.addTarget(self, action: #selector(pressNumberNineButton), for: .touchUpInside)
-//        buttonZero.addTarget(self, action: #selector(pressNumberZeroButton), for: .touchUpInside)
-    
+        buttonFour.addTarget(self, action: #selector(pressNumberFourButton), for: .touchUpInside)
+        buttonFive.addTarget(self, action: #selector(pressNumberFiveButton), for: .touchUpInside)
+        buttonSix.addTarget(self, action: #selector(pressNumberSixButton), for: .touchUpInside)
+        buttonSeven.addTarget(self, action: #selector(pressNumberSevenButton), for: .touchUpInside)
+        buttonEight.addTarget(self, action: #selector(pressNumberEightButton), for: .touchUpInside)
+        buttonNine.addTarget(self, action: #selector(pressNumberNineButton), for: .touchUpInside)
+        buttonZero.addTarget(self, action: #selector(pressNumberZeroButton), for: .touchUpInside)
+        
+        buttonDevide.addTarget(self, action: #selector(pressDevideButton), for: .touchUpInside)
+        buttonMult.addTarget(self, action: #selector(pressMultButton), for: .touchUpInside)
+        buttonPlus.addTarget(self, action: #selector(pressPlusButton), for: .touchUpInside)
+        buttonMinus.addTarget(self, action: #selector(pressMinusButton), for: .touchUpInside)
+        buttonEqual.addTarget(self, action: #selector(pressEqualButton), for: .touchUpInside)
+        
+        buttonAc.addTarget(self, action: #selector(pressACButton), for: .touchUpInside)
+        
     }
     
+    //    func preessButton() {
+    //        for element in arrayOfNumbersButton {
+    //        let number = element.currentTitle
+    //        if resultLabel.text == "0" {
+    //            resultLabel.text = number!
+    //        } else {
+    //            resultLabel.text = resultLabel.text! + number!
+    //        }
+    //        }
+    //    }
+    
+    //MARK: - press number buttons
     
     @objc func pressNumberOneButton() {
-        resultLabel.text = String(buttonOne.tag)
-        var number = UIbutton.currentTitle
-        print(number)
+        
+        let number = buttonOne.currentTitle
+        if resultLabel.text == "0" {
+            resultLabel.text = number!
+        } else {
+            resultLabel.text = resultLabel.text! + number!
+        }
+        
     }
     
     @objc func pressNumberTwoButton() {
-        resultLabel.text = String(buttonTwo.tag)
+        
+        let number = buttonTwo.currentTitle
+        if resultLabel.text == "0" {
+            resultLabel.text = number!
+        } else {
+            resultLabel.text = resultLabel.text! + number!
+        }
+        
     }
     
     @objc func pressNumberThreeButton() {
-        resultLabel.text = String(buttonThree.tag)
+        
+        let number = buttonThree.currentTitle
+        if resultLabel.text == "0" {
+            resultLabel.text = number!
+        } else {
+            resultLabel.text = resultLabel.text! + number!
+        }
+        
     }
     
-//    @objc func pressNumberTwoButton() {
-//        resultLabel.text = String(buttonTwo.tag)
-//    }
-//
-//    @objc func pressNumberTwoButton() {
-//        resultLabel.text = String(buttonTwo.tag)
-//    }
-//
-//    @objc func pressNumberTwoButton() {
-//        resultLabel.text = String(buttonTwo.tag)
-//    }
-//
-//    @objc func pressNumberTwoButton() {
-//        resultLabel.text = String(buttonTwo.tag)
-//    }
-//
-//    @objc func pressNumberTwoButton() {
-//        resultLabel.text = String(buttonTwo.tag)
-//    }
-//
-//    @objc func pressNumberTwoButton() {
-//        resultLabel.text = String(buttonTwo.tag)
-//    }
-//
-//    @objc func pressNumberTwoButton() {
-//        resultLabel.text = String(buttonTwo.tag)
-//    }
+    @objc func pressNumberFourButton() {
+        
+        let number = buttonFour.currentTitle
+        if resultLabel.text == "0" {
+            resultLabel.text = number!
+        } else {
+            resultLabel.text = resultLabel.text! + number!
+        }
+        
+    }
     
+    @objc func pressNumberFiveButton() {
+        
+        let number = buttonFive.currentTitle
+        if resultLabel.text == "0" {
+            resultLabel.text = number!
+        } else {
+            resultLabel.text = resultLabel.text! + number!
+        }
+        
+    }
     
+    @objc func pressNumberSixButton() {
+        
+        let number = buttonSix.currentTitle
+        if resultLabel.text == "0" {
+            resultLabel.text = number!
+        } else {
+            resultLabel.text = resultLabel.text! + number!
+        }
+        
+    }
     
+    @objc func pressNumberSevenButton() {
+        
+        let number = buttonSeven.currentTitle
+        if resultLabel.text == "0" {
+            resultLabel.text = number!
+        } else {
+            resultLabel.text = resultLabel.text! + number!
+        }
+        
+    }
     
-   
+    @objc func pressNumberEightButton() {
+        
+        let number = buttonEight.currentTitle
+        if resultLabel.text == "0" {
+            resultLabel.text = number!
+        } else {
+            resultLabel.text = resultLabel.text! + number!
+        }
+        
+    }
     
+    @objc func pressNumberNineButton() {
+        
+        let number = buttonNine.currentTitle
+        if resultLabel.text == "0" {
+            resultLabel.text = number!
+        } else {
+            resultLabel.text = resultLabel.text! + number!
+        }
+        
+    }
+    
+    @objc func pressNumberZeroButton() {
+        
+        let number = buttonZero.currentTitle
+        if resultLabel.text == "0" {
+            resultLabel.text = number!
+        } else {
+            resultLabel.text = resultLabel.text! + number!
+        }
+        
+    }
+    
+    @objc func pressACButton() {
+        firstNumber = 0
+        secondNumber = 0
+        resultLabel.text = "0"
+        operationSign = ""
+    }
+    
+    //MARK: - add Action
+    
+    @objc func pressDevideButton() {
+        if resultLabel.text == "" {
+            resultLabel.text = "0"
+        } else {
+            firstNumber = Double(resultLabel.text!)!
+            print(firstNumber)
+            resultLabel.text = ""
+            operationSign = buttonDevide.currentTitle!
+        }
+    }
+    @objc func pressMultButton() {
+        if resultLabel.text == "" {
+            resultLabel.text = "0"
+        } else {
+            firstNumber = Double(resultLabel.text!)!
+            print(firstNumber)
+            resultLabel.text = ""
+            operationSign = buttonMult.currentTitle!
+        }
+    }
+    @objc func pressPlusButton() {
+        if resultLabel.text == "" {
+            resultLabel.text = "0"
+        } else {
+            firstNumber = Double(resultLabel.text!)!
+            print(firstNumber)
+            resultLabel.text = ""
+            operationSign = buttonPlus.currentTitle!
+        }
+    }
+    @objc func pressMinusButton() {
+        if resultLabel.text == "" {
+            resultLabel.text = "0"
+        } else {
+            firstNumber = Double(resultLabel.text!)!
+            print(firstNumber)
+            resultLabel.text = ""
+            operationSign = buttonMinus.currentTitle!
+            print(operationSign)
+        }
+    }
+    
+    @objc func pressEqualButton() {
+        secondNumber = Double(resultLabel.text!)!
+        
+        switch operationSign {
+        case "+": resultLabel.text = String(firstNumber + secondNumber)
+        case "-": resultLabel.text = String(firstNumber - secondNumber)
+        case "X": resultLabel.text = String(firstNumber * secondNumber)
+        case "/": resultLabel.text = String(firstNumber / secondNumber)
+        default: break
+        }
+    }
     
     
 }
