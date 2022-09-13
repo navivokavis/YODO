@@ -32,12 +32,12 @@ class CalcViewController: UIViewController {
     var buttonPercent = UIButton()
     var buttonDot = UIButton()
     var arrayOfNumbersButton: [UIButton] = []
-    var arrayForStringResult: [String] = []
-    var arrayForIntResult: [Int] = []
     var firstNumber: Double = 0
     var secondNumber: Double = 0
     var operationSign: String = ""
     var result: Double = 0
+    var dotIsOnLabel = false
+    var isPlusBefore = false
     
     
     
@@ -64,7 +64,7 @@ class CalcViewController: UIViewController {
         resultLabel.textAlignment = .right
         resultLabel.backgroundColor = .white
         resultLabel.text = "0"
-        resultLabel.font = .systemFont(ofSize: 45)
+        resultLabel.font = .systemFont(ofSize: 55)
         
         addButtonOnView()
         addTargets()
@@ -168,6 +168,9 @@ class CalcViewController: UIViewController {
         buttonEqual.addTarget(self, action: #selector(pressEqualButton), for: .touchUpInside)
         
         buttonAc.addTarget(self, action: #selector(pressACButton), for: .touchUpInside)
+        buttonDot.addTarget(self, action: #selector(pressDotButton), for: .touchUpInside)
+        buttonPlusMinus.addTarget(self, action: #selector(pressPlusMinusButton), for: .touchUpInside)
+        buttonPercent.addTarget(self, action: #selector(pressPercentButton), for: .touchUpInside)
         
     }
     
@@ -299,6 +302,7 @@ class CalcViewController: UIViewController {
         secondNumber = 0
         resultLabel.text = "0"
         operationSign = ""
+        dotIsOnLabel = false
     }
     
     //MARK: - add Action
@@ -311,6 +315,7 @@ class CalcViewController: UIViewController {
             print(firstNumber)
             resultLabel.text = ""
             operationSign = buttonDevide.currentTitle!
+            dotIsOnLabel = false
         }
     }
     @objc func pressMultButton() {
@@ -321,6 +326,7 @@ class CalcViewController: UIViewController {
             print(firstNumber)
             resultLabel.text = ""
             operationSign = buttonMult.currentTitle!
+            dotIsOnLabel = false
         }
     }
     @objc func pressPlusButton() {
@@ -331,6 +337,7 @@ class CalcViewController: UIViewController {
             print(firstNumber)
             resultLabel.text = ""
             operationSign = buttonPlus.currentTitle!
+            dotIsOnLabel = false
         }
     }
     @objc func pressMinusButton() {
@@ -341,7 +348,7 @@ class CalcViewController: UIViewController {
             print(firstNumber)
             resultLabel.text = ""
             operationSign = buttonMinus.currentTitle!
-            print(operationSign)
+            dotIsOnLabel = false
         }
     }
     
@@ -355,7 +362,39 @@ class CalcViewController: UIViewController {
         case "/": resultLabel.text = String(firstNumber / secondNumber)
         default: break
         }
+        dotIsOnLabel = true
     }
     
+    @objc func pressDotButton() {
+        if !dotIsOnLabel {
+            resultLabel.text = resultLabel.text! + "."
+            dotIsOnLabel = true
+        } else if resultLabel.text == "0" {
+            resultLabel.text = resultLabel.text! + "."
+            dotIsOnLabel = true
     
+        }
+    }
+    
+    @objc func pressPlusMinusButton() {
+        if isPlusBefore == false {
+            resultLabel.text = "-" + resultLabel.text!
+            isPlusBefore = true
+        } else {
+            resultLabel.text = resultLabel.text?.replacingOccurrences(of: "-", with: "")
+            isPlusBefore = false
+        }
+    }
+    
+    @objc func pressPercentButton() {
+        if resultLabel.text == "0" {
+            resultLabel.text = String(firstNumber / 100)
+        } else if resultLabel.text != "0" && secondNumber == 0 {
+            resultLabel.text = String(Double(resultLabel.text!)! / 100)
+        } else {
+            resultLabel.text = String(firstNumber * (secondNumber * (secondNumber * 0.01)))
+        }
+        
+        
+    }
 }
