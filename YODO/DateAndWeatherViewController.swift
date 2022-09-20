@@ -15,6 +15,7 @@ class DateAndWeatherViewController: UIViewController {
     var tempLabel = UILabel()
     var searchButton = UIButton()
     var magnifyImage = UIImage()
+    var cityName = "Minsk"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +45,11 @@ class DateAndWeatherViewController: UIViewController {
         searchButton.tintColor = .black
         searchButton.addTarget(self, action: #selector(pressSearchButton), for: .touchUpInside)
         
+        cityLabel.textColor = .white
+        cityLabel.font = .systemFont(ofSize: 60)
+        cityLabel.text = cityName
+        
+        
     }
     
     func buildHierarchy() {
@@ -52,6 +58,9 @@ class DateAndWeatherViewController: UIViewController {
         searchButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -70).isActive = true
         searchButton.imageView?.layer.transform = CATransform3DMakeScale(3, 3, 3)
         
+        cityLabel.translatesAutoresizingMaskIntoConstraints = false
+        cityLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 150).isActive = true
+        cityLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
     @objc func pressSearchButton() {
@@ -67,8 +76,9 @@ class DateAndWeatherViewController: UIViewController {
             let textField = alertController.textFields?.first
             guard let cityName = textField?.text else { return }
             if cityName != "" {
-                cityName.split(separator: " ").joined(separator: "%20")
                 self.networkWeatherManager.currentWeather(forCity: cityName)
+                self.cityLabel.text = cityName
+                cityName.split(separator: " ").joined(separator: "%20")
             }
         }
         let cancel = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
