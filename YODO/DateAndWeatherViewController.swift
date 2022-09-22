@@ -14,12 +14,12 @@ class DateAndWeatherViewController: UIViewController {
     var cityLabel = UILabel()
     var tempLabel = UILabel()
     var feelsLikeLabel = UILabel()
-    var forWeaterIconImageView = UIView()
+//    var forWeaterIconImageView = UIView()
     var weatherIconImageView = UIImageView()
     var searchButton = UIButton()
     var magnifyImage = UIImage()
-    var newSize = CGSize(width: 200, height: 100)
-    let scaledImageSize = 4
+//    var newSize = CGSize(width: 200, height: 100)
+//    let scaledImageSize = 4
     
     
     
@@ -46,9 +46,7 @@ class DateAndWeatherViewController: UIViewController {
         view.addSubview(cityLabel)
         view.addSubview(tempLabel)
         view.addSubview(searchButton)
-
-        view.addSubview(forWeaterIconImageView)
-        forWeaterIconImageView.addSubview(weatherIconImageView)
+        view.addSubview(weatherIconImageView)
         view.addSubview(feelsLikeLabel)
     }
     
@@ -82,21 +80,19 @@ class DateAndWeatherViewController: UIViewController {
         cityLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 150).isActive = true
         cityLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
-        forWeaterIconImageView.translatesAutoresizingMaskIntoConstraints = false
-        forWeaterIconImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        forWeaterIconImageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
-//        weatherIconImageView.frame
-//        weatherIconImageView.layer.transform = CATransform3DMakeScale(5, 5, 5)
-        forWeaterIconImageView.topAnchor.constraint(equalTo: cityLabel.bottomAnchor, constant: 70).isActive = true
-        forWeaterIconImageView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 70).isActive = true
         
-        weatherIconImageView.translatesAutoresizingMaskIntoConstraints = false
-        weatherIconImageView.trailingAnchor.constraint(equalTo: forWeaterIconImageView.trailingAnchor).isActive = true
-        weatherIconImageView.leadingAnchor.constraint(equalTo: forWeaterIconImageView.leadingAnchor).isActive = true
-        weatherIconImageView.bottomAnchor.constraint(equalTo: forWeaterIconImageView.bottomAnchor).isActive = true
-        weatherIconImageView.topAnchor.constraint(equalTo: forWeaterIconImageView.topAnchor).isActive = true
+//        weatherIconImageView.translatesAutoresizingMaskIntoConstraints = false
+//        weatherIconImageView.trailingAnchor.constraint(equalTo: forWeaterIconImageView.trailingAnchor).isActive = true
+//        weatherIconImageView.leadingAnchor.constraint(equalTo: forWeaterIconImageView.leadingAnchor).isActive = true
+//        weatherIconImageView.bottomAnchor.constraint(equalTo: forWeaterIconImageView.bottomAnchor).isActive = true
+//        weatherIconImageView.topAnchor.constraint(equalTo: forWeaterIconImageView.topAnchor).isActive = true
 
-        
+        weatherIconImageView.contentMode = .scaleAspectFill
+        weatherIconImageView.translatesAutoresizingMaskIntoConstraints = false
+        weatherIconImageView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 50).isActive = true
+        weatherIconImageView.topAnchor.constraint(equalTo: cityLabel.bottomAnchor, constant: 100).isActive = true
+        weatherIconImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        weatherIconImageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
         
         tempLabel.translatesAutoresizingMaskIntoConstraints = false
         tempLabel.topAnchor.constraint(equalTo: cityLabel.bottomAnchor, constant: 50).isActive = true
