@@ -18,6 +18,8 @@
 		F02917BC28CB794F00A15FE8 /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02917BB28CB794F00A15FE8 /* QuestionViewController.swift */; };
 		F0C1D03628D9E1FC00C05E5D /* NetworkWeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C1D03528D9E1FC00C05E5D /* NetworkWeatherManager.swift */; };
 		F0C1D03828D9E34F00C05E5D /* Constans.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C1D03728D9E34F00C05E5D /* Constans.swift */; };
+		F0C1D03A28DBA56700C05E5D /* CurrentWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C1D03928DBA56700C05E5D /* CurrentWeatherData.swift */; };
+		F0C1D03C28DC490F00C05E5D /* CurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C1D03B28DC490F00C05E5D /* CurrentWeather.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		F02917BB28CB794F00A15FE8 /* QuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
 		F0C1D03528D9E1FC00C05E5D /* NetworkWeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkWeatherManager.swift; sourceTree = "<group>"; };
 		F0C1D03728D9E34F00C05E5D /* Constans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constans.swift; sourceTree = "<group>"; };
+		F0C1D03928DBA56700C05E5D /* CurrentWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherData.swift; sourceTree = "<group>"; };
+		F0C1D03B28DC490F00C05E5D /* CurrentWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeather.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,7 +54,7 @@
 		F029179728CB737600A15FE8 = {
 			isa = PBXGroup;
 			children = (
-				F0C1D03528D9E1FC00C05E5D /* NetworkWeatherManager.swift */,
+				F0C1D03D28DC4BC000C05E5D /* Models */,
 				F0C1D03728D9E34F00C05E5D /* Constans.swift */,
 				F02917A228CB737600A15FE8 /* YODO */,
 				F02917A128CB737600A15FE8 /* Products */,
@@ -80,6 +84,16 @@
 				F02917B128CB737800A15FE8 /* Info.plist */,
 			);
 			path = YODO;
+			sourceTree = "<group>";
+		};
+		F0C1D03D28DC4BC000C05E5D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F0C1D03528D9E1FC00C05E5D /* NetworkWeatherManager.swift */,
+				F0C1D03B28DC490F00C05E5D /* CurrentWeather.swift */,
+				F0C1D03928DBA56700C05E5D /* CurrentWeatherData.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -158,6 +172,8 @@
 				F0C1D03828D9E34F00C05E5D /* Constans.swift in Sources */,
 				F0C1D03628D9E1FC00C05E5D /* NetworkWeatherManager.swift in Sources */,
 				F02917BC28CB794F00A15FE8 /* QuestionViewController.swift in Sources */,
+				F0C1D03A28DBA56700C05E5D /* CurrentWeatherData.swift in Sources */,
+				F0C1D03C28DC490F00C05E5D /* CurrentWeather.swift in Sources */,
 				F02917B828CB75ED00A15FE8 /* CalcViewController.swift in Sources */,
 				F02917A428CB737600A15FE8 /* AppDelegate.swift in Sources */,
 				F02917A628CB737600A15FE8 /* SceneDelegate.swift in Sources */,

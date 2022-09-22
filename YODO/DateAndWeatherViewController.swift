@@ -13,15 +13,25 @@ class DateAndWeatherViewController: UIViewController {
     var networkWeatherManager = NetworkWeatherManager()
     var cityLabel = UILabel()
     var tempLabel = UILabel()
+    var feelsLikeLabel = UILabel()
+    var forWeaterIconImageView = UIView()
+    var weatherIconImageView = UIImageView()
     var searchButton = UIButton()
     var magnifyImage = UIImage()
-    var cityName = "Minsk"
+    var newSize = CGSize(width: 200, height: 100)
+    let scaledImageSize = 4
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemIndigo
         
-        networkWeatherManager.currentWeather(forCity: "Minsk")
+        networkWeatherManager.onCompletion = { [weak self] currentWeather in
+            guard let self = self else { return }
+            self.updateInterfaceWith(weather: currentWeather)
+        }
+        networkWeatherManager.fetchcurrentWeather(forCity: "Minsk")
         setup()
         
     }
@@ -36,6 +46,10 @@ class DateAndWeatherViewController: UIViewController {
         view.addSubview(cityLabel)
         view.addSubview(tempLabel)
         view.addSubview(searchButton)
+
+        view.addSubview(forWeaterIconImageView)
+        forWeaterIconImageView.addSubview(weatherIconImageView)
+        view.addSubview(feelsLikeLabel)
     }
     
     func configureSubviews() {
@@ -47,7 +61,13 @@ class DateAndWeatherViewController: UIViewController {
         
         cityLabel.textColor = .white
         cityLabel.font = .systemFont(ofSize: 60)
-        cityLabel.text = cityName
+        
+        weatherIconImageView.tintColor = .white
+        
+        
+        tempLabel.font = .systemFont(ofSize: 50)
+        
+        feelsLikeLabel.font = .systemFont(ofSize: 35)
         
         
     }
@@ -61,13 +81,37 @@ class DateAndWeatherViewController: UIViewController {
         cityLabel.translatesAutoresizingMaskIntoConstraints = false
         cityLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 150).isActive = true
         cityLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        forWeaterIconImageView.translatesAutoresizingMaskIntoConstraints = false
+        forWeaterIconImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        forWeaterIconImageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+//        weatherIconImageView.frame
+//        weatherIconImageView.layer.transform = CATransform3DMakeScale(5, 5, 5)
+        forWeaterIconImageView.topAnchor.constraint(equalTo: cityLabel.bottomAnchor, constant: 70).isActive = true
+        forWeaterIconImageView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 70).isActive = true
+        
+        weatherIconImageView.translatesAutoresizingMaskIntoConstraints = false
+        weatherIconImageView.trailingAnchor.constraint(equalTo: forWeaterIconImageView.trailingAnchor).isActive = true
+        weatherIconImageView.leadingAnchor.constraint(equalTo: forWeaterIconImageView.leadingAnchor).isActive = true
+        weatherIconImageView.bottomAnchor.constraint(equalTo: forWeaterIconImageView.bottomAnchor).isActive = true
+        weatherIconImageView.topAnchor.constraint(equalTo: forWeaterIconImageView.topAnchor).isActive = true
+
+        
+        
+        tempLabel.translatesAutoresizingMaskIntoConstraints = false
+        tempLabel.topAnchor.constraint(equalTo: cityLabel.bottomAnchor, constant: 50).isActive = true
+        tempLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -70).isActive = true
+        
+        feelsLikeLabel.translatesAutoresizingMaskIntoConstraints = false
+        feelsLikeLabel.topAnchor.constraint(equalTo: tempLabel.bottomAnchor, constant: 20).isActive = true
+        feelsLikeLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -70).isActive = true
     }
     
     @objc func pressSearchButton() {
-        presentAlertController()
+        presentSearchAlertController()
     }
     
-    func presentAlertController() {
+    func presentSearchAlertController() {
         let message = "Введите город"
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.addTextField()
@@ -76,9 +120,9 @@ class DateAndWeatherViewController: UIViewController {
             let textField = alertController.textFields?.first
             guard let cityName = textField?.text else { return }
             if cityName != "" {
-                self.networkWeatherManager.currentWeather(forCity: cityName)
-                self.cityLabel.text = cityName
-                cityName.split(separator: " ").joined(separator: "%20")
+                self.networkWeatherManager.fetchcurrentWeather(forCity: cityName.split(separator: " ").joined(separator: "%20"))
+                //                self.cityLabel.text = cityName
+                
             }
         }
         let cancel = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
@@ -87,7 +131,15 @@ class DateAndWeatherViewController: UIViewController {
         alertController.addAction(cancel)
         present(alertController, animated: true)
         
-        
+    }
+    
+    func updateInterfaceWith(weather: CurrentWeater) {
+        DispatchQueue.main.async {
+        self.cityLabel.text = weather.cityName
+            self.tempLabel.text = weather.temperatureString + " °C"
+        self.feelsLikeLabel.text = weather.feelsLikeTemperatureString + " °C"
+        self.weatherIconImageView.image = UIImage(systemName: weather.systemIconNameString)
+        }
     }
     
 }
