@@ -395,5 +395,4 @@ class CalcViewController: UIViewController {
             resultLabel.text = String(firstNumber * (secondNumber * (secondNumber * 0.01)))
         }
     }
-    
 }

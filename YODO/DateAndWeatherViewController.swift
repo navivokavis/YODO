@@ -43,8 +43,6 @@ class DateAndWeatherViewController: UIViewController {
     func layoutSubviews() {
         view.addSubview(cityLabel)
         view.addSubview(searchButton)
-//        view.addSubview(weatherIconImageView)
-//        view.addSubview(forTemperatureView)
         view.addSubview(forImageAndTemperatureView)
         forImageAndTemperatureView.addSubview(weatherIconImageView)
         forImageAndTemperatureView.addSubview(forTemperatureView)
@@ -178,13 +176,5 @@ class DateAndWeatherViewController: UIViewController {
         
     }
     
-//    func changeBackgroundColorWithTemperature(temp: CurrentWeater) {
-//        switch weather.t{
-//        case :
-//            <#code#>
-//        default:
-//            <#code#>
-//        }
-//    }
     
 }
